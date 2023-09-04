@@ -33,8 +33,9 @@ This command will download the necessary Docker images, build the project, and s
     ```bash
     docker-compose exec web python manage.py migrate
     docker-compose exec web python manage.py createsuperuser
+4. Replace example ssl keys in Words_counter/ssl with your own.
    
-4. Access the application in your web browser:
+5. Access the application in your web browser:
 
 Open your web browser and go to http://localhost or you domain
 
