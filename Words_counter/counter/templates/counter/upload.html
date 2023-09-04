@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Words counter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upload your documents ( PDF, docx ) to get an instant count of the number of
+    words in your document.">
+    <meta name="keywords" content="pdf words counter, docx words counter">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="EN">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600&family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="headers">
+    <h1>Upload your documents ( PDF, docx ) to get an instant count of the number of words in your document.</h1>
+        <h4>* we do not store any documents you upload here...</h4></div>
+    <div class="container">
+        {% if additional_info %}
+        <h2>Words count for: {{ filename }}</h2>
+        <ul>
+            <li><strong>Total words: </strong>{{ additional_info.total_words }}</li>
+            <li><strong>Unique words: </strong>{{ additional_info.unique_words }}</li>
+        </ul>
+        {% endif %}
+        {% if wrong_filetype %}
+        <h2>File: {{ filename }}</h2>
+        <p class="wrong_file"><strong style="color: red;">{{ wrong_filetype }}</strong></p>
+        {% endif %}
+        <h2>Upload a File</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload File</button>
+        </form>
+    </div>
+<footer>
+    <p><a href="https://t.me/chrnv_dev" target="_blank">Made by CHRNV</a></p>
+</footer>
+</body>
+</html>

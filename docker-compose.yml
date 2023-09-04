@@ -1,0 +1,22 @@
+services:
+
+
+  web:
+    build: .
+    command: ["uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
+    restart: always
+    env_file:
+      - /path/to/.env
+    volumes:
+      - .:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE=Words_counter.settings.prod
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./config/nginx:/etc/nginx/templates
+      - .:/code
+    ports:
+      - "80:80"
+      - "443:443"
